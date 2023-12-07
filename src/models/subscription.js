@@ -5,7 +5,7 @@ import mongoose, { Schema, model, models } from "mongoose";
 
 mongoose
   .connect(process.env.MONGODB_URI, {
-    dbName: newsletter_subscriptions,
+    dbName: "newsletter_subscriptions",
     useNewUrlParser: true, //a workaround mongoose deprecation warning
     useUnifiedTopology: true, //a workaround mongoose deprecation warning
   })
