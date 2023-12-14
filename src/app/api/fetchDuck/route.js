@@ -6,9 +6,10 @@ export async function GET() {
       method: "GET",
     });
     const data = await res.json();
-    console.log(data.url);
+    const duckImg = data.url;
+    console.log(`This is the api +++++ ${duckImg}`);
 
-    return NextResponse.json({ data });
+    return NextResponse.json(duckImg);
   } catch (error) {
     console.log(`Fetching duck unsuccessful + ${error}`);
   }

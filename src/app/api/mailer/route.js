@@ -7,7 +7,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 export async function POST(req) {
   try {
     const body = await req.json();
-    console.log(body.duckImg.data.url);
+    console.log(`This is the mailer >>>>> ${body.duckImg}`);
 
     const msg = {
       to: body.formData.email, // Change to your recipient
@@ -19,7 +19,7 @@ export async function POST(req) {
         <br><br>
         Here is a duck to wish you a wonderful day!
         <br><br>
-        <img src="${body.duckImg.data.url}" />
+        <img src="${body.duckImg}" />
       `,
     };
 

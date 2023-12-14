@@ -18,6 +18,7 @@ const Form = () => {
     try {
       const fetchDuck = await fetch("/api/fetchDuck");
       const duckImg = await fetchDuck.json();
+      console.log(`This is the FORM ----- ${duckImg}`);
 
       // const res = await fetch("/api/subscription/new", {
       const res = await fetch("/api/mailer", {
