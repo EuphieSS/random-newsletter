@@ -17,8 +17,8 @@ const Form = () => {
     e.preventDefault();
 
     try {
-      // const fetchDuck = await fetch("/api/fetchDuck");
-      // const duckImg = await fetchDuck.json();
+      const fetchDuck = await fetch("/api/fetchDuck");
+      const duckImg = await fetchDuck.json();
       // console.log(`This is the FORM ----- ${duckImg}`);
 
       // const mailList = await mailCreator(duckImg);
@@ -31,10 +31,15 @@ const Form = () => {
       //   });
       // }
 
-      const res = await fetch("/api/subscription/new", {
+      const res = await fetch("/api/mailer", {
         method: "POST",
-        body: JSON.stringify({ formData }),
+        body: JSON.stringify({ formData, duckImg }),
       });
+
+      // const res = await fetch("/api/subscription/new", {
+      //   method: "POST",
+      //   body: JSON.stringify({ formData }),
+      // });
 
       if (res.ok) {
         router.push("/"); // add subscription success page?
@@ -59,7 +64,7 @@ const Form = () => {
         <label>
           <span className="font-medium">Name</span>
           <input
-            placeholder="  your name..."
+            placeholder=" your name..."
             required
             className="ml-3 rounded outline-0"
             value={formData.username}
@@ -72,7 +77,7 @@ const Form = () => {
         <label>
           <span className="font-medium">Email</span>
           <input
-            placeholder="  your email..."
+            placeholder=" your email..."
             required
             className="ml-3 rounded outline-0"
             value={formData.email}
