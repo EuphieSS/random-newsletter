@@ -3,6 +3,7 @@
 import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { mailCreator } from "@/lib/dynamicMailElements";
 
 const Form = () => {
   const router = useRouter();
@@ -20,15 +21,26 @@ const Form = () => {
       const duckImg = await fetchDuck.json();
       console.log(`This is the FORM ----- ${duckImg}`);
 
-      // const res = await fetch("/api/subscription/new", {
-      const res = await fetch("/api/mailer", {
-        method: "POST",
-        body: JSON.stringify({ formData, duckImg }),
-      });
+      const mailList = await mailCreator(duckImg);
+      console.log(`This is the MAILLIST ----- ${mailList[0].to}`);
 
-      if (res.ok) {
-        router.push("/"); // add subscription success page?
+      for (let i = 0; i < mailList.length; i++) {
+        await fetch("/api/mailer", {
+          method: "POST",
+          body: JSON.stringify(mailList[i]),
+        });
       }
+      // const res = await fetch("/api/subscription/new", {
+      // const res = await fetch("/api/mailer", {
+      //   method: "POST",
+      //   body: JSON.stringify({ formData, duckImg }),
+      // method: "POST",
+      // body: JSON.stringify({ formData }),
+      // });
+
+      // if (res.ok) {
+      //   router.push("/"); // add subscription success page?
+      // }
     } catch (error) {
       console.log(`Failed to subscribe + ${error}`);
     } finally {
