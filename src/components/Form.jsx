@@ -16,9 +16,13 @@ const Form = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("/api/subscription/new", {
+      const fetchDuck = await fetch("/api/fetchDuck");
+      const duckImg = await fetchDuck.json();
+
+      // const res = await fetch("/api/subscription/new", {
+      const res = await fetch("/api/mailer", {
         method: "POST",
-        body: JSON.stringify({ formData }),
+        body: JSON.stringify({ formData, duckImg }),
       });
 
       if (res.ok) {
@@ -32,7 +36,6 @@ const Form = () => {
         email: "",
       });
     }
-    // router.refresh(); // might not need
   };
 
   return (

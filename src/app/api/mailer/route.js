@@ -4,16 +4,23 @@ const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-export async function POST(req, res) {
+export async function POST(req) {
   try {
     const body = await req.json();
+    console.log(body.duckImg.data.url);
 
     const msg = {
       to: body.formData.email, // Change to your recipient
       from: "samma118@hotmail.com", // Change to your verified sender
-      subject: "Sending with SendGrid is Fun",
-      text: "This is a test email",
-      html: `<strong>Hi, ${body.formData.username} This is a test email.</strong>`,
+      subject: "Quack!",
+      text: "Have a quacking wonderful day!",
+      html: `
+        <strong>Hello ${body.formData.username},</strong>
+        <br><br>
+        Here is a duck to wish you a wonderful day!
+        <br><br>
+        <img src="${body.duckImg.data.url}" />
+      `,
     };
 
     await sgMail.send(msg);
