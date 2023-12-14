@@ -4,8 +4,6 @@
   "homepage": "https://EuphieSS.github.io/random-newsletter",
   "private": true,
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
