@@ -1,3 +1,12 @@
+## This Application is still in development.
+
+Features to be added:
+
+- Automated scheduled mailing
+- Subscribe and unsubscribe function
+- More polished UI and UX
+- And more... (still ducking around with ideas)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
