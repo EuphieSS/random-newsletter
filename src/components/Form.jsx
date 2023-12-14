@@ -3,7 +3,7 @@
 import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { mailCreator } from "@/lib/dynamicMailElements";
+// import { mailCreator } from "@/lib/dynamicMailElements";
 
 const Form = () => {
   const router = useRouter();
@@ -17,30 +17,28 @@ const Form = () => {
     e.preventDefault();
 
     try {
-      const fetchDuck = await fetch("/api/fetchDuck");
-      const duckImg = await fetchDuck.json();
-      console.log(`This is the FORM ----- ${duckImg}`);
+      // const fetchDuck = await fetch("/api/fetchDuck");
+      // const duckImg = await fetchDuck.json();
+      // console.log(`This is the FORM ----- ${duckImg}`);
 
-      const mailList = await mailCreator(duckImg);
-      console.log(`This is the MAILLIST ----- ${mailList[0].to}`);
+      // const mailList = await mailCreator(duckImg);
+      // console.log(`This is the MAILLIST ----- ${mailList[0].to}`);
 
-      for (let i = 0; i < mailList.length; i++) {
-        await fetch("/api/mailer", {
-          method: "POST",
-          body: JSON.stringify(mailList[i]),
-        });
-      }
-      // const res = await fetch("/api/subscription/new", {
-      // const res = await fetch("/api/mailer", {
-      //   method: "POST",
-      //   body: JSON.stringify({ formData, duckImg }),
-      // method: "POST",
-      // body: JSON.stringify({ formData }),
-      // });
-
-      // if (res.ok) {
-      //   router.push("/"); // add subscription success page?
+      // for (let i = 0; i < mailList.length; i++) {
+      //   await fetch("/api/mailer", {
+      //     method: "POST",
+      //     body: JSON.stringify(mailList[i]),
+      //   });
       // }
+
+      const res = await fetch("/api/subscription/new", {
+        method: "POST",
+        body: JSON.stringify({ formData }),
+      });
+
+      if (res.ok) {
+        router.push("/"); // add subscription success page?
+      }
     } catch (error) {
       console.log(`Failed to subscribe + ${error}`);
     } finally {
@@ -59,11 +57,11 @@ const Form = () => {
         onSubmit={handleSubmit}
       >
         <label>
-          <span>Name</span>
+          <span className="font-medium">Name</span>
           <input
-            placeholder="your name..."
+            placeholder="  your name..."
             required
-            className="ml-3 border-solid border-black outline-0"
+            className="ml-3 rounded outline-0"
             value={formData.username}
             onChange={(e) =>
               setFormData({ ...formData, username: e.target.value })
@@ -72,11 +70,11 @@ const Form = () => {
         </label>
 
         <label>
-          <span>Email</span>
+          <span className="font-medium">Email</span>
           <input
-            placeholder="your email..."
+            placeholder="  your email..."
             required
-            className="ml-3 border-solid border-black outline-0"
+            className="ml-3 rounded outline-0"
             value={formData.email}
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
@@ -86,9 +84,9 @@ const Form = () => {
 
         <button
           type="submit"
-          className="px-5 py-1 bg-lime-600 rounded-full text-white"
+          className="px-5 py-1 bg-lime-600 rounded-full text-white text-sm"
         >
-          subscribe
+          SEND A DUCK
         </button>
       </form>
     </section>
